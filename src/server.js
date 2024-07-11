@@ -21,16 +21,19 @@ app
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
     // Custom API route using Google Generative AI
-    server.post("/api/google-generative-ai", async (req, res) => {
-      const { prompt } = req.body;
+    server.post("/gemini", async (req, res) => {
+      console.log("req.body.history:", req.body.history);
+      console.log("req.body.message:", req.body.message);
 
-      try {
-        const response = await genAI.generateText({ prompt });
-        res.json(response);
-      } catch (error) {
-        console.error("Error generating text:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-      }
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const chat = model.startChat({
+        history: req.body.history,
+      });
+      const msg = req.body.message;
+      const result = await chat.sendMessage(msg);
+      const response = await result.response;
+      const text = response.text();
+      res.send(text);
     });
 
     // Handle all other routes with Next.js
