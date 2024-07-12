@@ -24,8 +24,8 @@
   --accentLight: #e8bf4a;
   --accentDark: #dea128;
   --sun: #fdd016;
-  --logoAccent: #a9dbc9;
-  --logoAccentDark: #5b7b70;
+  --buttonAccent: #a9dbc9;
+  --buttonAccentDark: #5b7b70;
   --navText: #a5a5a5;
   --subtitleText: #333333;
   --icon: #b9b9b9;
@@ -37,7 +37,7 @@
 html {
   height: 100%;
   font-size: 16px;
-  background: var(--primary100);
+  background: var(--primary90);
   background-size: 224px;
 }
 
@@ -79,7 +79,7 @@ h6 {
 }
 
 a {
-  border-radius: 12px;
+  border-radius: 6px;
 }
 
 #root,
@@ -93,11 +93,12 @@ p {
 }
 
 .app {
-  width: 80vw;
+  width: 60vw;
   margin: 10vw;
   height: 80vh;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .search-result {
@@ -106,13 +107,18 @@ p {
 }
 
 .surprise {
-  background-color: var(--sun);
-  border-radius: 12px;
+  background-color: var(--buttonAccent);
+  border-radius: 6px;
   color: var(--primary10);
   font-weight: 600;
   padding: 4px 12px;
   margin: 0 0 2px 5px;
+  cursor: pointer;
   border: none;
+}
+
+.surprise:hover {
+  background-color: var(--buttonAccentDark);
 }
 
 .input-container {
@@ -143,14 +149,14 @@ p {
   min-width: 10%;
   border: none;
   border-left: 1px solid var(--primary70);
-  background-color: var(--accentLight);
+  background-color: var(--buttonAccent);
   color: var(--primary10);
   font-weight: 700;
   cursor: pointer;
 }
 
-.input-container button:active {
-  background-color: var(--accentDark);
+.input-container button:hover {
+  background-color: var(--buttonAccentDark);
 }
 
 .answer {

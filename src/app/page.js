@@ -5,22 +5,7 @@ export default function Home() {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
-  const initialHistory = [
-    {
-      role: "user",
-      parts: [
-        {
-          text: "System prompt: You are a music history chatbot with a long career not dissimilar from Jim DeRogatis or the likes, but you also love classical music and New Music classical. You love to talk about the influences of an artist, i.e. what groups or solo artists or composers influenced them. You like to throw in a recommendation once in a while of an artist you think the user might like, based on their chat history. Respond understood if you got it.",
-        },
-      ],
-    },
-    {
-      role: "model",
-      parts: [{ text: "Understood." }],
-    },
-  ];
-
-  const [chatHistory, setChatHistory] = useState(initialHistory);
+  const [chatHistory, setChatHistory] = useState([]);
 
   const surpriseOptions = [
     "When was J.S. Bach born?",
@@ -28,6 +13,14 @@ export default function Home() {
     "Who is Kaija Saariaho?",
     "How did 13 become Taylor Swift's favorite number?",
     "Who are Beyoncé's biggest influences?",
+    "Why do all the Motown groups have 'The' in their names?",
+    "What is the difference between a symphony and a concerto?",
+    "Did Beethoven really write his 9th Symphony while deaf?",
+    "Did Franz Liszt really play 19th-century rock concerts?",
+    "What kind of guitar did Jimi Hendrix play?",
+    "How old was Mozart when he wrote his first symphony?",
+    "Who is the most sampled artist in hip-hop?",
+    "What is Billie Eilish's favorite song?",
   ];
 
   const surprise = () => {
@@ -92,13 +85,13 @@ export default function Home() {
           placeholder="Enter your question here..."
           onChange={(e) => setValue(e.target.value)}
         />
-        {!error && <button onClick={getResponse}>Ask Me</button>}
+        {!error && <button onClick={getResponse}>Ask</button>}
         {error && <button onClick={clear}>Clear</button>}
       </div>
       {error && <p>{error}</p>}
       <div className="search-result">
-        Search Result
-        {chatHistory.slice(2).map((chatItem, _index) => (
+        <h4>Search Result</h4>
+        {chatHistory.map((chatItem, _index) => (
           <div key={_index}>
             <p className="answer">
               <b>{chatItem.role}</b>: {chatItem.parts[0].text}
